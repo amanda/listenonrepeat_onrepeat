@@ -10,4 +10,4 @@ clone of listenonrepeat.com
 ## todo:
 1. real database like sqlite3 or sqlalchemy, so view counts persist.
 2. tests
-~~3. recommended videos~~
+3. ~~recommended videos~~
