@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
 
-		<h1>listen on repeat (on repeat!)</h1>
+    <h1>listen on repeat (on repeat!)</h1>
 
     <!-- Reference: https://developers.google.com/youtube/iframe_api_reference -->
-  	<div id="yt-player"></div>
+    <div id="yt-player"></div>
 
     <script type="text/javascript">
         var tag = document.createElement('script');
@@ -13,39 +13,39 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
-		function onYouTubeIframeAPIReady() {
-		  player = new YT.Player('yt-player', {
-		    height: '390',
-		    width: '640',
-		    videoId: '{{ yt_id }}',
-		    // loop player parameter seems to need a playlist to work with in iframe embed
-		    // reference: https://developers.google.com/youtube/player_parameters#loop
-		    playerVars: { 
-		    	'loop': 1, 
-		    	'playlist': '{{ yt_id }}',
-		    	'showinfo': 0,
-		    	'autoplay': 1 },
-		    events: {
-		    	'onStateChange': onPlayerStateChange
-		    }
-		  });
-		}
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-player', {
+        height: '390',
+        width: '640',
+        videoId: '{{ yt_id }}',
+        // loop player parameter seems to need a playlist to work with in iframe embed
+        // reference: https://developers.google.com/youtube/player_parameters#loop
+        playerVars: { 
+          'loop': 1, 
+          'playlist': '{{ yt_id }}',
+          'showinfo': 0,
+          'autoplay': 1 },
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
 
-		var playCount = 0;
-		function onPlayerStateChange(event) {
-			if (event.data === YT.PlayerState.ENDED) {
-				playCount += .5 // playlist needed to loop counts each play as 1/2 the playlist of 2, see above
-			}
-			document.getElementById('playcount').innerText = playCount;
-		}		
+    var playCount = 0;
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.ENDED) {
+        playCount += .5 // playlist needed to loop counts each play as 1/2 the playlist of 2, see above
+      }
+      document.getElementById('playcount').innerText = playCount;
+    }   
     </script>
 
     <div id="count">
-    	<p>repeats so far:</p>
-  		<p id="playcount">0</p>
-  	</div>
+      <p>repeats so far:</p>
+      <p id="playcount">0</p>
+    </div>
 
-  	<div id="related">
+    <div id="related">
       {% if related %}
       <table>
         <th>like this? here are some links to related videos:</th>
@@ -57,20 +57,20 @@
         </table>
         {% endif %}
       </table>
-  	</div>
+    </div>
 
     <div id="topten">
-    	{% if titles %}
-    	<table>
-    	<tr>
-    		<th>top 10 videos this session: </th>
-    	</tr>
-    	{% for title in titles %}
-    	<tr>
-	    	<td>{{ title[0] }}</td>
-    	</tr>
-    	{% endfor %}
-    	</table>
-    	{% endif %}
+      {% if titles %}
+      <table>
+      <tr>
+        <th>top 10 videos this session: </th>
+      </tr>
+      {% for title in titles %}
+      <tr>
+        <td>{{ title.title }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+      {% endif %}
     </div>
 {% endblock %}
