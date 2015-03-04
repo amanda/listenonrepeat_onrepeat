@@ -36,14 +36,15 @@ th {
   font-size: 12px;
 }
 
+#count p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 #related {
   margin-bottom: 20px;
 }
 
-p {
-  margin-top: 0;
-  margin-bottom: 0;
-}
 
 @media (max-width: 500px) {
       h1 {
