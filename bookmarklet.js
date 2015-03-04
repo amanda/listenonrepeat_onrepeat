@@ -1,7 +1,7 @@
 // readable
 (function () {
   if (location.search !== "") {
-    var localURL = "http://listenonrepeatonrepeat.herokuapp.com/" + location.search;
+    var localURL = "http://listenonrepeatonrepeat.herokuapp.com/watch" + location.search;
     location = localURL;
   }
 })();
