@@ -29,10 +29,20 @@ table {
 
 th {
   background-color: red;
+  width: 500px;
 }
 
 #count {
   font-size: 12px;
+}
+
+#related {
+  margin-bottom: 20px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 @media (max-width: 500px) {

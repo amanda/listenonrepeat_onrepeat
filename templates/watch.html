@@ -13,41 +13,50 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
-				function onYouTubeIframeAPIReady() {
-				  player = new YT.Player('yt-player', {
-				    height: '390',
-				    width: '640',
-				    videoId: '{{ yt_id }}',
-				    // loop player parameter seems to need a playlist to work with in iframe embed
-				    // reference: https://developers.google.com/youtube/player_parameters#loop
-				    playerVars: { 
-				    	'loop': 1, 
-				    	'playlist': '{{ yt_id }}',
-				    	'showinfo': 0,
-				    	'autoplay': 1 },
-				    events: {
-				    	'onStateChange': onPlayerStateChange
-				    }
-				  });
-				}
+		function onYouTubeIframeAPIReady() {
+		  player = new YT.Player('yt-player', {
+		    height: '390',
+		    width: '640',
+		    videoId: '{{ yt_id }}',
+		    // loop player parameter seems to need a playlist to work with in iframe embed
+		    // reference: https://developers.google.com/youtube/player_parameters#loop
+		    playerVars: { 
+		    	'loop': 1, 
+		    	'playlist': '{{ yt_id }}',
+		    	'showinfo': 0,
+		    	'autoplay': 1 },
+		    events: {
+		    	'onStateChange': onPlayerStateChange
+		    }
+		  });
+		}
 
-				var playCount = 0;
-				function onPlayerStateChange(event) {
-					if (event.data === YT.PlayerState.ENDED) {
-						playCount += .5 // playlist needed to loop counts each play as 1/2 the playlist of 2, see above
-					}
-					document.getElementById('playcount').innerText = playCount;
-				}	
-				
-
+		var playCount = 0;
+		function onPlayerStateChange(event) {
+			if (event.data === YT.PlayerState.ENDED) {
+				playCount += .5 // playlist needed to loop counts each play as 1/2 the playlist of 2, see above
+			}
+			document.getElementById('playcount').innerText = playCount;
+		}		
     </script>
+
     <div id="count">
     	<p>repeats so far:</p>
   		<p id="playcount">0</p>
   	</div>
 
-  	<div id="recs">
-
+  	<div id="related">
+      <table>
+        <th>like this? here are some links to related videos:</th>
+        {% if related %}
+        {% for url, title in related.iteritems() %}
+        <tr>
+        <td><a href="{{ url }}">{{ title }}</a></td>
+        </tr>
+        {% endfor %}
+        </table>
+        {% endif %}
+      </table>
   	</div>
 
     <div id="topten">
