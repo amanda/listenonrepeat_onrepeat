@@ -46,9 +46,9 @@
   	</div>
 
   	<div id="related">
+      {% if related %}
       <table>
         <th>like this? here are some links to related videos:</th>
-        {% if related %}
         {% for url, title in related.iteritems() %}
         <tr>
         <td><a href="{{ url }}">{{ title }}</a></td>

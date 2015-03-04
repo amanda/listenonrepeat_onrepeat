@@ -46,9 +46,9 @@ def show_video():
     for vid, plays in top_ten:
         titles[get_title(vid)] = plays
     sorted_titles = sorted(titles.items(), key=operator.itemgetter(1))[::-1]
-    if YOUTUBE_KEY != None:
+    try:
         related_videos = get_related(yt_id)
-    else:
+    except:
         related_videos = None  # hacky workaround if api key lookup fails
     return render_template('watch.html', yt_id=yt_id, titles=sorted_titles, related=related_videos)
 
