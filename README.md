@@ -8,5 +8,6 @@ clone of listenonrepeat.com
 4. install the bookmarklet (available on the homepage) and click it while on youtube to start that video on repeat, or replace the "youtube.com" part of a youtube URL with "localhost:5000"
 
 ## todo:
-1. database! so view counts persist.
+1. real database like sqlite3 or sqlalchemy, so view counts persist.
 2. tests
+3. recommended videos
