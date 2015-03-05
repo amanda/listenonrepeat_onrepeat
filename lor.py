@@ -40,6 +40,8 @@ def teardown_request(exception):
 
 # routing and helper functions
 def get_related(yt_id):
+    '''(str) -> {str youtube id: str video title}
+    requests videos related to supplied youtube id using the youtube api'''
     r = requests.get('https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=' +
                      yt_id + '&type=video&key=' + YOUTUBE_KEY)
     related = r.json()
@@ -66,8 +68,8 @@ def show_video():
     '''gets the youtube id from the URL query params and
     1. adds it to the db and increases play count by 1
     2. passes it to the template js to show that video,
-    3. gets the top 10 videos by play count to pass to the template
-    4. gets related videos'''
+    3. gets the top 10 videos from the db by play count to pass to the template
+    4. gets related videos using get_related function'''
     yt_id = str(request.args.get('v'))
     yt_title = get_title(yt_id)
     g.db.execute("INSERT OR REPLACE INTO videos (ytid, title, plays) VALUES (?, ?, (SELECT plays FROM videos WHERE ytid = ?) + 1)", [yt_id, yt_title, yt_id])
